@@ -10,8 +10,8 @@
 Summary: Security module for the Apache HTTP Server
 Name: mod_security 
 Epoch: 2
-Version: 2.9.2
-Release: 2%{?dist}
+Version: 2.9.3
+Release: 1%{?dist}
 License: ASL 2.0
 URL: http://www.modsecurity.org/
 Group: System Environment/Daemons
@@ -94,7 +94,7 @@ rm -rf %{buildroot}
 
 %files
 %defattr (-,root,root)
-%doc CHANGES LICENSE README.TXT NOTICE
+%doc CHANGES LICENSE README.md NOTICE
 %{_httpd_moddir}/mod_security2.so
 %config(noreplace) %{_httpd_confdir}/*.conf
 %if "%{_httpd_modconfdir}" != "%{_httpd_confdir}"
@@ -116,6 +116,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Sun Feb 16 2020 Matt Saladna <matt@apisnetworks.com> - 2.9.3-1
+- Version refresh
+
 * Wed Sep  6 2017 Daniel Kopecek <dkopecek@redhat.com> - 2.9.2-1
 - RHEL-7.5 erratum
  - Update to 2.9.2
