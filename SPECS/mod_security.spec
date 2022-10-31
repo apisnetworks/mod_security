@@ -10,8 +10,8 @@
 Summary: Security module for the Apache HTTP Server
 Name: mod_security 
 Epoch: 2
-Version: 2.9.3
-Release: 2%{?dist}
+Version: 2.9.6
+Release: 1%{?dist}
 License: ASL 2.0
 URL: http://www.modsecurity.org/
 Group: System Environment/Daemons
