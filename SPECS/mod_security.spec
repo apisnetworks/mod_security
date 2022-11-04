@@ -11,7 +11,7 @@ Summary: Security module for the Apache HTTP Server
 Name: mod_security 
 Epoch: 2
 Version: 2.9.6
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: ASL 2.0
 URL: http://www.modsecurity.org/
 Group: System Environment/Daemons
@@ -96,7 +96,7 @@ rm -rf %{buildroot}
 %defattr (-,root,root)
 %doc CHANGES LICENSE README.md NOTICE
 %{_httpd_moddir}/mod_security2.so
-%{_httpd_confdir}/*.conf
+%config(noreplace) %{_httpd_confdir}/*.conf
 %if "%{_httpd_modconfdir}" != "%{_httpd_confdir}"
 %config(noreplace) %{_httpd_modconfdir}/*.conf
 %endif
@@ -115,7 +115,15 @@ rm -rf %{buildroot}
 %attr(0755,root,root) %{_bindir}/mlogc-batch-load
 %endif
 
+%post
+if [[ $1 -eq 2 ]] && [[ "%{version}-%{release}" == "2.9.6-2.apnscp" ]]; then
+	[[ -f  %{_httpd_confdir}/mod_security.conf.rpmsave ]] && mv %{_httpd_confdir}/mod_security.conf.rpmsave %{_httpd_confdir}/mod_security.conf
+fi
+
 %changelog
+* Thu Nov 03 2022 Matt Saladna <matt@apisnetworks.com> - 2.9.6-2
+- mod_security.conf provisioning handled by Bootstrapper
+
 * Thu Mar 19 2020 Matt Saladna <matt@apisnetworks.com> - 2.9.3-2
 - Always replace mod_security.conf
 
